@@ -1,0 +1,7 @@
+{
+    "nodes" :
+    [
+	    "http://localhost:4568",
+	    "http://localhost:4567"
+    ]
+}

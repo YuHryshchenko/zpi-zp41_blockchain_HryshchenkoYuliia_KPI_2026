@@ -1,0 +1,589 @@
+{
+  "info": {
+    "_postman_id": "14bd50a7-da92-44bc-95da-82f0f98de84c",
+    "name": "Blockchain",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "26381693"
+  },
+  "item": [
+    {
+      "name": "Mine",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4567/mine",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4567",
+          "path": [
+            "mine"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Mine",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4567/mine",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4567",
+              "path": [
+                "mine"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 04:21:46 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Server",
+              "value": "Jetty(9.4.4.v20170414)"
+            }
+          ],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\n    \"index\": 1,\n    \"timestamp\": 1768969306158,\n    \"transactions\": [\n        {\n            \"sender\": \"0\",\n            \"recipient\": \"a9681a0ebdce4acdaa9f880c24147e7c\",\n            \"amount\": 1\n        }\n    ],\n    \"nonce\": 5735,\n    \"previousHash\": \"7134010a83a79219e96c2f1b3a1143dd8575c6a98dc48048bdbec540a8ad2696\",\n    \"message\": \"New Block Forged\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "New Transaction",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\"sender\": \"my address\",\n\"recipient\": \"someone else's address 2\",\n\"amount\": 5\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:4567/transactions/new",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4567",
+          "path": [
+            "transactions",
+            "new"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "New Transaction",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\"sender\": \"my address\",\n\"recipient\": \"someone else's address 2\",\n\"amount\": 5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4567/transactions/new",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4567",
+              "path": [
+                "transactions",
+                "new"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 04:21:56 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html;charset=utf-8"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Server",
+              "value": "Jetty(9.4.4.v20170414)"
+            }
+          ],
+          "cookie": [],
+          "body": "Transaction will be added to Block 2"
+        }
+      ]
+    },
+    {
+      "name": "Chain",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4567/chain",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4567",
+          "path": [
+            "chain"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Chain",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4567/chain",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4567",
+              "path": [
+                "chain"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 04:22:10 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Server",
+              "value": "Jetty(9.4.4.v20170414)"
+            }
+          ],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\n    \"chain\": [\n        {\n            \"index\": 1,\n            \"timestamp\": 1768969306129,\n            \"transactions\": [],\n            \"nonce\": 0,\n            \"previousHash\": \"Hryshchenko\",\n            \"hash\": \"7134010a83a79219e96c2f1b3a1143dd8575c6a98dc48048bdbec540a8ad2696\"\n        },\n        {\n            \"index\": 1,\n            \"timestamp\": 1768969306158,\n            \"transactions\": [\n                {\n                    \"sender\": \"0\",\n                    \"recipient\": \"a9681a0ebdce4acdaa9f880c24147e7c\",\n                    \"amount\": 1\n                }\n            ],\n            \"nonce\": 5735,\n            \"previousHash\": \"7134010a83a79219e96c2f1b3a1143dd8575c6a98dc48048bdbec540a8ad2696\"\n        }\n    ],\n    \"length\": 2\n}"
+        }
+      ]
+    },
+    {
+      "name": "Nodes register 4567",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"nodes\" :\n    [\n\t    \"http://localhost:4568\",\n\t    \"http://localhost:4567\"\n    ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:4567/nodes/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4567",
+          "path": [
+            "nodes",
+            "register"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Nodes register 4567",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nodes\" :\n    [\n\t    \"http://localhost:4568\",\n\t    \"http://localhost:4567\"\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4567/nodes/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4567",
+              "path": [
+                "nodes",
+                "register"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 04:03:59 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Server",
+              "value": "Jetty(9.4.4.v20170414)"
+            }
+          ],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "[\n    \"http://localhost:4568\",\n    \"http://localhost:4567\"\n]"
+        }
+      ]
+    },
+    {
+      "name": "Nodes register 4568",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"nodes\" :\n    [\n\t    \"http://localhost:4568\",\n\t    \"http://localhost:4567\"\n    ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:4568/nodes/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4568",
+          "path": [
+            "nodes",
+            "register"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Nodes register 4568",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nodes\" :\n    [\n\t    \"http://localhost:4568\",\n\t    \"http://localhost:4567\"\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4568/nodes/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4568",
+              "path": [
+                "nodes",
+                "register"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 04:05:50 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Server",
+              "value": "Jetty(9.4.4.v20170414)"
+            }
+          ],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "[\n    \"http://localhost:4568\",\n    \"http://localhost:4567\"\n]"
+        }
+      ]
+    },
+    {
+      "name": "Mine 4567",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"http://localhost:4567\",\n\t\"http://localhost:4568\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:4567/mine",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4567",
+          "path": [
+            "mine"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Mine 4567",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"http://localhost:4567\",\n\t\"http://localhost:4568\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4567/mine",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4567",
+              "path": [
+                "mine"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 04:06:24 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Server",
+              "value": "Jetty(9.4.4.v20170414)"
+            }
+          ],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\n    \"index\": 1,\n    \"timestamp\": 1768968384595,\n    \"transactions\": [\n        {\n            \"sender\": \"0\",\n            \"recipient\": \"5ba2232b0f1649ef9941d077dfa3d872\",\n            \"amount\": 1\n        }\n    ],\n    \"nonce\": 5735,\n    \"previousHash\": \"b75f2b99033e9cca08afb69fbef56291d8d475edb6f8220a1c03818027dcfc71\",\n    \"message\": \"New Block Forged\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Nodes resolve 4568",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"http://localhost:4567\",\n\t\"http://localhost:4568\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:4568/nodes/resolve",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4568",
+          "path": [
+            "nodes",
+            "resolve"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Nodes resolve 4568",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"http://localhost:4567\",\n\t\"http://localhost:4568\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4568/nodes/resolve",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4568",
+              "path": [
+                "nodes",
+                "resolve"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 04:09:27 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Server",
+              "value": "Jetty(9.4.4.v20170414)"
+            }
+          ],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\n    \"chain\": [\n        {\n            \"index\": 1,\n            \"timestamp\": 1768968384554,\n            \"transactions\": [],\n            \"nonce\": 0,\n            \"previousHash\": \"Hryshchenko\",\n            \"hash\": \"b75f2b99033e9cca08afb69fbef56291d8d475edb6f8220a1c03818027dcfc71\"\n        },\n        {\n            \"index\": 1,\n            \"timestamp\": 1768968384595,\n            \"transactions\": [\n                {\n                    \"sender\": \"0\",\n                    \"recipient\": \"5ba2232b0f1649ef9941d077dfa3d872\",\n                    \"amount\": 1\n                }\n            ],\n            \"nonce\": 5735,\n            \"previousHash\": \"b75f2b99033e9cca08afb69fbef56291d8d475edb6f8220a1c03818027dcfc71\"\n        }\n    ],\n    \"length\": 2\n}"
+        }
+      ]
+    }
+  ]
+}
