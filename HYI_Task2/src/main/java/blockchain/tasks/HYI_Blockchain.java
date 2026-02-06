@@ -73,6 +73,10 @@ public class HYI_Blockchain {
         // Оновлюємо баланси (Завдання 2)
         hyi_updateBalances(txs);
 
+        System.out.println("Block mined: " + newBlock.getIndex() +
+                " | Reward: " + reward +
+                " | Miner: " + minerAddress);
+
         return newBlock;
     }
 
