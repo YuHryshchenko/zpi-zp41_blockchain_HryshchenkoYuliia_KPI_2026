@@ -28,17 +28,40 @@ public class HYI_Blockchain {
     }
 
     // === Завдання 1.1: Префікс [PIP] (hyi_) у методах ===
-    
-    // Створення Генезис блоку (Завдання 1.2)
+
     public void hyi_createGenesisBlock() {
-        // Попередній хеш = [SN]
-        HYI_Block genesis = new HYI_Block(1, 0, HYI_Config.SN, new ArrayList<>());
-        // Для генезису хеш може бути довільним або обчисленим
-        genesis.setHash(hyi_calculateHash(genesis));
+
+        List<HYI_Transaction> genesisTxs = new ArrayList<>();
+
+        String prevHash = HYI_Config.SN;
+        int nonce = HYI_Config.START_NONCE;
+
+        String hash;
+
+        System.out.print("Mining Genesis block... ");
+
+        while (true) {
+
+            String input = prevHash + nonce + genesisTxs.toString();
+
+            hash = Hashing.sha256()
+                    .hashString(input, StandardCharsets.UTF_8)
+                    .toString();
+
+            if (hash.endsWith(HYI_Config.MM_STR)) {
+                System.out.println("Success!");
+                System.out.println("Genesis Nonce: " + nonce);
+                System.out.println("Genesis Hash: " + hash);
+                break;
+            }
+
+            nonce++;
+        }
+
+        HYI_Block genesis = new HYI_Block(1, nonce, prevHash, genesisTxs);
+        genesis.setHash(hash);
+
         chain.add(genesis);
-        
-        // Ініціалізація балансу "системи" або майнера, якщо потрібно
-        balances.put("miner", 0);
     }
 
     // Створення нового блоку (Mining)
