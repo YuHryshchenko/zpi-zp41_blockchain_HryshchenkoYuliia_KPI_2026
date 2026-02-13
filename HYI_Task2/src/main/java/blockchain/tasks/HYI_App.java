@@ -30,6 +30,7 @@ public class HYI_App
             blockchain.hyi_printBalances();
         }
 
+        blockchain.hyi_mineBlock(myWallet);
         blockchain.hyi_printBalances();
 
         // 2.4 Додавання транзакцій у Мемпул
