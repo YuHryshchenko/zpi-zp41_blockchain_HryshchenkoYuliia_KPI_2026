@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
 
 public class HYI_Blockchain {
     private List<HYI_Block> chain = new ArrayList<>();
-    private Set<String> nodes = new HashSet<>();
+    private final Set<String> nodes = new HashSet<>();
     // "Мемпул" транзакцій
-    private List<HYI_Transaction> currentTransactions = new ArrayList<>();
+    private final List<HYI_Transaction> currentTransactions = new ArrayList<>();
     
     // Для Завдання 2: Баланси (гаманець -> сума)
-    private Map<String, Integer> balances = new HashMap<>();
+    private final Map<String, Integer> balances = new HashMap<>();
 
     public HYI_Blockchain() {
         // Генезис блок не майниться за правилами PoW, а створюється вручну згідно Завдання 1.2
@@ -62,7 +62,7 @@ public class HYI_Blockchain {
         
         // Створюємо блок
         HYI_Block newBlock = new HYI_Block(chain.size() + 1, nonce, prevHash, txs);
-        String newHash = hyi_calculateHash(newBlock.getIndex(), newBlock.getTimestamp(), nonce, prevHash);
+        String newHash = hyi_calculateHash(nonce, prevHash);
         newBlock.setHash(newHash);
 
         // Очищаємо мемпул
@@ -120,9 +120,18 @@ public class HYI_Blockchain {
         }
     }
 
+    /*
     // Хешування
     private String hyi_calculateHash(int index, long time, long nonce, String prevHash) {
         String input = index + "" + time + nonce + prevHash;
+        return Hashing.sha256().hashString(input, StandardCharsets.UTF_8).toString();
+    }
+    */
+
+    // Хешування
+    private String hyi_calculateHash(long nonce, String prevHash) {
+        List<HYI_Transaction> txs = new ArrayList<>(currentTransactions);
+        String input = prevHash + nonce + txs;
         return Hashing.sha256().hashString(input, StandardCharsets.UTF_8).toString();
     }
 
@@ -135,7 +144,7 @@ public class HYI_Blockchain {
     }
     
     private String hyi_calculateHash(HYI_Block block) {
-        return hyi_calculateHash(block.getIndex(), block.getTimestamp(), block.getNonce(), block.getPreviousHash());
+        return hyi_calculateHash(block.getNonce(), block.getPreviousHash());
     }
 
     public void hyi_registerNode(String netloc) {
@@ -216,13 +225,11 @@ public class HYI_Blockchain {
      * @return Хеш блока
      */
     public static String hash(HYI_Block block) {
-        StringBuilder hashingInputBuilder = new StringBuilder();
         // додаємо параметри блока у змінну в певному незмінному по-
-        hashingInputBuilder.append(block.getIndex())
-                .append(block.getTimestamp()).append(block.getProof())
-                .append(block.getPreviousHash());
 
-        String hashingInput = hashingInputBuilder.toString();
+        String hashingInput = String.valueOf(block.getIndex()) +
+                block.getTimestamp() + block.getProof() +
+                block.getPreviousHash();
         // генеруємо хеш блока на основі її полів за допомогою змінної
         return Hashing.sha256().hashString(hashingInput, StandardCharsets.UTF_8).toString();
     }
@@ -256,7 +263,7 @@ public class HYI_Blockchain {
      */
 
     private boolean hyi_isProofValid(int lastProof, int proof) {
-        String guessString = Integer.toString(lastProof) + Integer.toString(proof);
+        String guessString = Integer.toString(lastProof) + proof;
         String guessHash = Hashing.sha256().hashString(guessString,
                 StandardCharsets.UTF_8).toString();
         return guessHash.endsWith("0000");
