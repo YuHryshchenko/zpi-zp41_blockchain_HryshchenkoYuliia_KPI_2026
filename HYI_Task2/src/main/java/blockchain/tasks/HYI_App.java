@@ -11,10 +11,11 @@ public class HYI_App
         System.out.println("=== START TASK 2 (" + HYI_Config.PIP + ") ===");
         
         HYI_Blockchain blockchain = new HYI_Blockchain();
-        blockchain.hyi_createGenesisBlock(); // Block 1 (Genesis)
 
         String myWallet = "MyWallet";
         String friendWallet = "FriendWallet";
+
+        blockchain.hyi_createGenesisBlock(myWallet); // Block 1 (Genesis)
 
         // Розрахунок кількості блоків для майнінгу: ([DD]+1) mod 13
         int blocksToMine = (HYI_Config.DD + 1) % 13;
@@ -29,7 +30,6 @@ public class HYI_App
             blockchain.hyi_printBalances();
         }
 
-        blockchain.hyi_mineBlock(myWallet);
         blockchain.hyi_printBalances();
 
         // 2.4 Додавання транзакцій у Мемпул

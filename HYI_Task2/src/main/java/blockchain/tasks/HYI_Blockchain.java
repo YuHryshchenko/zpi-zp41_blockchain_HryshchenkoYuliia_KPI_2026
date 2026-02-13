@@ -28,17 +28,54 @@ public class HYI_Blockchain {
     }
 
     // === Завдання 1.1: Префікс [PIP] (hyi_) у методах ===
-    
-    // Створення Генезис блоку (Завдання 1.2)
-    public void hyi_createGenesisBlock() {
-        // Попередній хеш = [SN]
-        HYI_Block genesis = new HYI_Block(1, 0, HYI_Config.SN, new ArrayList<>());
-        // Для генезису хеш може бути довільним або обчисленим
-        genesis.setHash(hyi_calculateHash(genesis));
+
+    public void hyi_createGenesisBlock(String minerAddress) {
+
+        System.out.println("=== Creating Genesis Block ===");
+
+        // Розрахунок винагороди для блоку 1
+        int reward = hyi_calculateReward(1);
+
+        // Створюємо список транзакцій генезісу
+        List<HYI_Transaction> genesisTxs = new ArrayList<>();
+
+        if (reward > 0) {
+            HYI_Transaction coinbase =
+                    new HYI_Transaction("0", minerAddress, reward);
+
+            genesisTxs.add(coinbase);
+
+            System.out.println("Genesis Coinbase: " + coinbase);
+        }
+
+        // Previous hash для генезісу
+        String prevHash = HYI_Config.SN;
+
+        // Запускаємо PoW
+        int nonce = hyi_proofOfWork(prevHash, genesisTxs);
+
+        // Обчислюємо хеш правильно (з транзакціями!)
+        String hash = hyi_calculateHash(nonce, prevHash, genesisTxs);
+
+        // Створюємо блок
+        HYI_Block genesis = new HYI_Block(
+                1,
+                nonce,
+                prevHash,
+                genesisTxs
+        );
+
+        genesis.setHash(hash);
+
+        // Додаємо у ланцюг
         chain.add(genesis);
-        
-        // Ініціалізація балансу "системи" або майнера, якщо потрібно
-        balances.put("miner", 0);
+
+        // Оновлюємо баланси
+        hyi_updateBalances(genesisTxs);
+
+        System.out.println("Genesis Block mined!");
+        System.out.println("Nonce: " + nonce);
+        System.out.println("Hash: " + hash);
     }
 
     // Створення нового блоку (Mining)

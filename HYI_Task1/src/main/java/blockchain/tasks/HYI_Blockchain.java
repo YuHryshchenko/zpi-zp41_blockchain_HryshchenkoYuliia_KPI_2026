@@ -139,7 +139,7 @@ public class HYI_Blockchain {
         return this.nodes;
     }
 
-        private String hyi_calculateHash(HYI_Block block) {
+    private String hyi_calculateHash(HYI_Block block) {
         return hyi_calculateHash(
                 block.getNonce(),
                 block.getPreviousHash(),

@@ -39,11 +39,12 @@ public class HYI_Controller {
         // Endpoint to mine a new block
         get("/mine", (req, res) -> {
             HYI_Block lastBlock = blockchain.hyi_lastBlock();
+            String myWallet = "MyWallet";
 
             // Якщо це перший запуск і блоків ще немає (lastBlock == null),
             // створюємо Генезис-блок автоматично.
             if (lastBlock == null) {
-                blockchain.hyi_createGenesisBlock();
+                blockchain.hyi_createGenesisBlock(myWallet);
                 lastBlock = blockchain.hyi_lastBlock();
             }
             int lastProof = lastBlock.getProof();
