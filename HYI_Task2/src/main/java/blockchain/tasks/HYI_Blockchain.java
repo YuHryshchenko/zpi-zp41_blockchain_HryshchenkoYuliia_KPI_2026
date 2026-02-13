@@ -62,7 +62,7 @@ public class HYI_Blockchain {
         
         // Створюємо блок
         HYI_Block newBlock = new HYI_Block(chain.size() + 1, nonce, prevHash, txs);
-        String newHash = hyi_calculateHash(nonce, prevHash);
+        String newHash = hyi_calculateHash(nonce, prevHash, txs);
         newBlock.setHash(newHash);
 
         // Очищаємо мемпул
@@ -120,20 +120,17 @@ public class HYI_Blockchain {
         }
     }
 
-    /*
     // Хешування
-    private String hyi_calculateHash(int index, long time, long nonce, String prevHash) {
-        String input = index + "" + time + nonce + prevHash;
-        return Hashing.sha256().hashString(input, StandardCharsets.UTF_8).toString();
-    }
-    */
+    private String hyi_calculateHash(long nonce,
+                                     String prevHash,
+                                     List<HYI_Transaction> txs) {
 
-    // Хешування
-    private String hyi_calculateHash(long nonce, String prevHash) {
-        List<HYI_Transaction> txs = new ArrayList<>(currentTransactions);
-        String input = prevHash + nonce + txs;
-        return Hashing.sha256().hashString(input, StandardCharsets.UTF_8).toString();
+        String input = prevHash + nonce + txs.toString();
+        return Hashing.sha256()
+                .hashString(input, StandardCharsets.UTF_8)
+                .toString();
     }
+
 
     public List<HYI_Block> hyi_getChain() {
         return this.chain;
@@ -142,9 +139,13 @@ public class HYI_Blockchain {
     public Set<String> hyi_getNodes() {
         return this.nodes;
     }
-    
+
     private String hyi_calculateHash(HYI_Block block) {
-        return hyi_calculateHash(block.getNonce(), block.getPreviousHash());
+        return hyi_calculateHash(
+                block.getNonce(),
+                block.getPreviousHash(),
+                block.getTransactions()
+        );
     }
 
     public void hyi_registerNode(String netloc) {
